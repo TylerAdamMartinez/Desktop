@@ -1,0 +1,28 @@
+[language-server.deno]
+command = "deno"
+args = ["lsp"]
+config = { deno = { enable = true, lint = true, unstable = true } }
+
+[[language]]
+name = "typescript"
+language-servers = ["deno"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "javascript"
+language-servers = ["deno"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = ["deno"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = ["deno"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+auto-format = true
