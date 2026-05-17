@@ -1,5 +1,5 @@
 import { App, staticFiles } from "fresh";
-import { define, type State } from "./utils.ts";
+import { type State } from "@/utils.ts";
 
 export const app = new App<State>();
 
@@ -11,6 +11,14 @@ app.use(async (ctx) => {
   return await ctx.next();
 });
 
+app.use((ctx) => {
+  const { config, url, req, params, state, error } = ctx;
+
+  console.log({ config, url, req, params, state, error });
+
+  return ctx.next();
+});
+
 // this is the same as the /api/:name route defined via a file. feel free to delete this!
 app.get("/api2/:name", (ctx) => {
   const name = ctx.params.name;
@@ -19,12 +27,9 @@ app.get("/api2/:name", (ctx) => {
   );
 });
 
-// this can also be defined via a file. feel free to delete this!
-const exampleLoggerMiddleware = define.middleware((ctx) => {
-  console.log(`${ctx.req.method} ${ctx.req.url}`);
-  return ctx.next();
+app.notFound(() => {
+  return new Response("Not Found", { status: 404 });
 });
-app.use(exampleLoggerMiddleware);
 
 // Include file-system based routes here
 app.fsRoutes();

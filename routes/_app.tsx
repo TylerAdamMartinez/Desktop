@@ -1,4 +1,5 @@
 import { define } from "@/utils.ts";
+import { Partial } from "fresh/runtime";
 
 export default define.page(function App({ Component }) {
   return (
@@ -38,8 +39,10 @@ export default define.page(function App({ Component }) {
           content="https://yourdomain.com/og-image.png"
         />
       </head>
-      <body>
-        <Component />
+      <body f-client-nav>
+        <Partial name="body">
+          <Component />
+        </Partial>
       </body>
     </html>
   );

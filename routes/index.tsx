@@ -14,7 +14,7 @@ const transactions = [
   { name: "Spotify", category: "Subscriptions", amount: "-$10.99" },
 ];
 
-export default define.page(function Home() {
+export default define.page(function Home({ route, info }) {
   return (
     <div class="min-h-screen bg-gray-950 text-gray-100">
       <Head>
@@ -25,13 +25,19 @@ export default define.page(function Home() {
         <header class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p class="text-sm text-emerald-400">Dashboard</p>
-            <h1 class="text-3xl font-bold tracking-tight">Your Money</h1>
+            <h1 class="text-3xl font-bold tracking-tight">
+              Your Money {route || "No route found"}
+            </h1>
             <p class="mt-1 text-gray-400">
-              Track balances, spending, income, and goals in one place.
+              Track balances, spending, income, and goals in one place.{" "}
+              {JSON.stringify(info) || "No page info"}
             </p>
           </div>
 
-          <button class="rounded-xl bg-emerald-500 px-4 py-2 font-medium text-gray-950 hover:bg-emerald-400">
+          <button
+            type="button"
+            class="rounded-xl bg-emerald-500 px-4 py-2 font-medium text-gray-950 hover:bg-emerald-400"
+          >
             Add Transaction
           </button>
         </header>
@@ -60,7 +66,10 @@ export default define.page(function Home() {
           <div class="rounded-2xl border border-gray-800 bg-gray-900 p-5">
             <div class="mb-4 flex items-center justify-between">
               <h2 class="text-xl font-semibold">Recent Transactions</h2>
-              <a href="#" class="text-sm text-emerald-400 hover:text-emerald-300">
+              <a
+                href="#"
+                class="text-sm text-emerald-400 hover:text-emerald-300"
+              >
                 View all
               </a>
             </div>
